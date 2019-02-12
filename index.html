@@ -1,4 +1,62 @@
 <html>
-  <head></head>
-  <body>hello</body>
+    <head>
+            <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <style>
+            .container {
+                width: 100%;
+                height: auto;
+                bottom: 0px;
+                top: 0px;
+                left: 0;
+                position: absolute;
+                text-align: center;
+                font-family: 'Raleway', sans-serif;
+                font-size: 5em;
+            }
+
+            #quote {
+                position: absolute;
+                top: 25%;
+                left: 15%;
+                right: 15%;
+                bottom: 25%;
+            }
+
+            .btn {
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+
+        <p id="quote">Click the button!</p>
+
+        <button class="btn" onClick="newQuote()">Next</button>
+        </div>
+
+        <script>
+            var quotes = [
+                "You know how to make me smile on a gloomy day and how to make me laugh on any other.",
+                "Your smile is brighter than the most intense of flames, and every time you smile, I can’t help but smile too.",
+                "Knowing that you will be the one to whom I come home to makes me the happiest man alive.",
+                "No matter what the future holds, you will always be a part of me.",
+                "All the times we spend together are the times when I am happiest.",
+                "I can only be myself when I am with you.",
+                "I want the world to know that you are mine, and yet I only want you for myself.",
+                "No matter where we go, I will always find my way back to you, my star."
+            ];
+
+            function getQuote() {
+                return quotes[Math.floor(Math.random()*quotes.length)];
+            }
+
+            function newQuote() {
+                var q = getQuote();
+                document.getElementById("quote").textContent = q;
+            }
+
+        </script>
+    </body>
 </html>
