@@ -1,12 +1,26 @@
 <html>
     <head>
-            <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <title>Your Kosti Co. Ltd.</title>
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
         <style>
+            body {
+                margin: 0;
+            }
+            .header {
+                background-color: #F8DC6F;
+                padding: 10px;
+            }
+
+            .logo {
+                width: 150px;
+                height: auto;
+            }
+
             .container {
                 width: 100%;
                 height: auto;
                 bottom: 0px;
-                top: 0px;
+                top: 25%;
                 left: 0;
                 position: absolute;
                 display: inline-block;
@@ -41,8 +55,8 @@
                 font-size: 13px;
                 border-radius: 4px;
                 font-weight: 500;
-  line-height: 1.3;
-  box-shadow: 2px 5px 10px #e4e4e4
+                line-height: 1.3;
+                box-shadow: 2px 5px 10px #e4e4e4;
             }
 
             .btn:hover {
@@ -55,18 +69,59 @@
                 opacity: .75;
             }
 
+            #form {
+                vertical-align: middle;
+            }
+
+            .coupon {
+                font: inherit;
+                padding: 0.75rem;
+            }
+
             .hidden {
                 display: none;
+            }
+
+            .hidden-t {
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s 0.75s, opacity 0.75s linear;
+            }
+
+            .visible-t {
+                visibility: visible;
+                opacity: 1;
+                transition: opacity 0.75s linear;
+            }
+
+            .footer {
+                background-color: #132F40;
+                color:#F8F8F8;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            .footer-content {
+                font-size: 0.5em;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
         </style>
     </head>
     <body>
 
+        <div class="header">
+            <a href="#default"><img class="logo" src="https://yourkosti.com/static/logo.png" /></a>
+        </div>
+
         <div class="container">
 
         <form name="codeForm" id="form">
-            <input type="text" placeholder="Coupon code" name="code"/>
-            <input type="submit" value="Enter" class=".btn"/>
+            <input type="text" placeholder="Coupon code" name="code" class="coupon"/>
+            <input type="submit" value="Enter" class="btn"/>
         </form>
 
             <div class="hidden">
@@ -76,6 +131,7 @@
                 
                 It seems you received the email. </br>
                 </br>
+
                 I left you some messages to brighten up your day,</br>
                 as much as you brighten up mine :) </br>
                 
@@ -83,6 +139,17 @@
                 </p>
 
                 <button class="btn" onClick="newQuote()">Next</button>
+            </div>
+
+            <div class="footer">
+                <div class="footer-content">
+                    <p><strong>Your Kosti Co. Ltd.</strong></p>
+                    <p id="desc">
+                        We're a dedicated team of service providers for varying business needs and requirements.
+                        <br />
+                        You may find us on &infin; Success Lane.
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -95,26 +162,58 @@
                 "All the times we spend together are the times when I am happiest.",
                 "I can only be myself when I am with you.",
                 "I want the world to know that you are mine, and yet I only want you for myself.",
-                "No matter where we go, I will always find my way back to you, my star."
+                "No matter where we go, I will always find my way back to you, my star.",
+                "I love you.",
+                "Whenever I see you, all my worries just melt away.",
+                "Calling us 'Exclusive' isn't enough. I am yours forever.",
+                "Nothing in my life has ever meant as much to me as you do.",
+                "The only thing that gives my life meaning is your presence in it.",
+                "Before you, love for me, was fiction. With you, love is now a basic necessity.",
+                "The spaces between my fingers are a perfect fit for yours.",
+                "When I rest my palm on your cheek, I feel your heat, life and love all at once.",
+                "You know more about me than I know about myself.",
+                "Every cuddle with you is a priceless memory and every kiss is a moment of joy.",
+                "Whether I am awake or asleep, you're always on my mind.",
+                "Your eyes are like a starry sky. Once I start looking, I can't stop.",
+                "You are them most thoughtful and understanding person I know. And I'm glad that you're mine.",
+                "Soon you'll be my wife, and I'll be your husband. This will remain true for all eternity.",
+                "I will trade all the tea in the world for you.",
+                "Our love story may not be a fairy tale, but it's damn close to one.",
+                "Life will not always be easy, but living it with you is the real reward.",
+                "You're the only person who knows the real me and continues to love me anyway.",
+                "Even if I could only see in black-and-white, your love would enrich my world with colour.",
+                "Valentine's day may be just one day, but my love for you is eternal.",
+                "If I discovered a new flower, I would name it after you.",
+                "Imagining my life without you is not something I can do.",
+                "I am truly in love with you.",
             ];
 
             document.getElementById("form").addEventListener("submit", submitForm, false);
+            document.addEventListener('contextmenu', event => event.preventDefault());
 
             function getQuote() {
                 return quotes[Math.floor(Math.random()*quotes.length)];
             }
 
             function newQuote() {
-                var q = getQuote();
-                document.getElementById("quote").textContent = q;
+                var elem = document.getElementById("quote");
+                elem.classList.remove("visible-t");
+                elem.classList.add("hidden-t");
+                setTimeout(function() {
+                    elem.classList.remove("hidden-t");
+                    elem.classList.add("visible-t");
+                    elem.textContent = getQuote();
+                }, 750);
             }
 
             function submitForm(e) {
                 e.preventDefault();
                 var c = document.forms["codeForm"]["code"].value;
                 if (c == "F7X#B48Y") {
+                    document.title = "I love you <3";
                     document.getElementsByClassName("hidden")[0].classList.remove("hidden");
                     document.getElementById("form").classList.add("hidden");
+                    document.getElementById("desc").innerHTML = "I am a dedicated cuddles provider for you and only you <3.<br/>You can find me in your heart or at &infin; Cuddles Lane."
                 }
             }
 
