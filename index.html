@@ -189,11 +189,23 @@
                 "I am truly in love with you.",
             ];
 
+            var unseenQuotes = quotes.slice();
+
             document.getElementById("form").addEventListener("submit", submitForm, false);
             document.addEventListener('contextmenu', event => event.preventDefault());
 
             function getQuote() {
-                return quotes[Math.floor(Math.random()*quotes.length)];
+                if (unseenQuotes.length > 0) {
+                    var i = randIndex(unseenQuotes.length);
+                    var quote = unseenQuotes[i];
+                    unseenQuotes.splice(i,1);
+                    return quote;
+                }
+                return quotes[randIndex(quotes.length)];
+            }
+
+            function randIndex(len) {
+                return Math.floor(Math.random()*len)
             }
 
             function newQuote() {
@@ -211,10 +223,22 @@
                 e.preventDefault();
                 var c = document.forms["codeForm"]["code"].value;
                 if (c == "F7X#B48Y") {
-                    document.title = "I love you <3";
-                    document.getElementsByClassName("hidden")[0].classList.remove("hidden");
-                    document.getElementById("form").classList.add("hidden");
-                    document.getElementById("desc").innerHTML = "I am a dedicated cuddles provider for you and only you <3.<br/>You can find me in your heart or at &infin; Cuddles Lane."
+                    activateExperience();
+                }
+            }
+
+            function activateExperience() {
+                localStorage.setItem("baby", true);
+                document.title = "I love you <3";
+                document.getElementsByClassName("hidden")[0].classList.remove("hidden");
+                document.getElementById("form").classList.add("hidden");
+                document.getElementById("desc").innerHTML = "I am a dedicated cuddles provider for you and only you <3.<br/>You can find me in your heart or at &infin; Cuddles Lane."
+
+            }
+
+            window.onload = function() {
+                if (localStorage.getItem("baby")) {
+                    activateExperience();
                 }
             }
 
